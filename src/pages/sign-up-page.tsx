@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useSignUp } from "@/hooks/mutations/use-sign-up";
 import { useState } from "react";
 import { Link } from "react-router";
 
@@ -7,11 +8,14 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { mutate: signUp, isPending } = useSignUp();
+
   const handleSignUpClick = () => {
     if (email.trim() === "") return;
     if (password.trim() === "") return;
 
     //유효성 검사가 통과 되면 supabase에 회원가입 요청을 보내야한다.
+    signUp({ email, password });
   };
 
   return (
@@ -34,7 +38,13 @@ export default function SignUpPage() {
         />
       </div>
       <div>
-        <Button className="w-full">회원가입</Button>
+        <Button
+          className="w-full"
+          onClick={handleSignUpClick}
+          disabled={isPending}
+        >
+          {isPending ? "회원 가입 처리 중입니다." : "회원가입"}
+        </Button>
       </div>
       <div>
         <Link className="text-muted-foreground hover:underline" to={"/sign-in"}>
