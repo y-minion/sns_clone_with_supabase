@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import SignUpPage from "./pages/sign-up-page";
 import SignInPage from "./pages/sign-in-page";
 import ForgetPasswordPage from "./pages/forget-password-page";
@@ -7,6 +7,7 @@ import PostDetailPage from "./pages/post-detail-page";
 import ProfileDetailPage from "./pages/profile-detail-page";
 import ResetPasswordPage from "./pages/reset-password-page";
 import GlobalLayout from "./components/layout/global-layout";
+import AuthConfirmPage from "./pages/auth-confirm-page";
 
 export default function RootRoute() {
   return (
@@ -15,6 +16,7 @@ export default function RootRoute() {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/forgot-password" element={<ForgetPasswordPage />} />
+        <Route path="/auth-confirm" element={<AuthConfirmPage />} />
 
         <Route path="/" element={<IndexPage />} />
         <Route path="/post/:postId" element={<PostDetailPage />} />
