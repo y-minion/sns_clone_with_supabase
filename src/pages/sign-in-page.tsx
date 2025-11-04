@@ -6,12 +6,23 @@ import { Link } from "react-router";
 import gitHubLogo from "@/assets/github-mark.svg";
 import useSignInWithOAuth from "@/hooks/mutations/use-sign-in-with-oauth";
 import type { Provider } from "@supabase/supabase-js";
+import { toast } from "sonner";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate: signInWithPassword } = useSignWithPassword();
+  const { mutate: signInWithPassword } = useSignWithPassword({
+    onError: (error: Error) => {
+      setPassword("");
+      toast.error(error.message, {
+        style: {
+          background: "red",
+        },
+        position: "top-center",
+      });
+    },
+  });
   const { mutate: signInWithOAuth } = useSignInWithOAuth();
 
   function handleSignInWithPassword() {

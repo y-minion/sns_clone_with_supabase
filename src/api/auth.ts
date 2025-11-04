@@ -40,7 +40,7 @@ export async function signInWithPassword({
     password,
   });
 
-  if (error) throw error;
+  if (error) throw error; //여기서 에러를 던지면 useMutaion에서 에러를 감지한다.
   return data;
 }
 
