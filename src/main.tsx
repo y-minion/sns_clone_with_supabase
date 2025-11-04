@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
       <Toaster />
-      <AuthEventListener />
+      {/* <AuthEventListener /> */}
       <App />
     </QueryClientProvider>
   </BrowserRouter>,
