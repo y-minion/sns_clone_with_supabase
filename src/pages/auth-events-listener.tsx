@@ -5,18 +5,11 @@ import { useNavigate } from "react-router";
 export default function AuthEventListener() {
   const navigate = useNavigate();
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        console.log("✅ Initial session found, navigating to /");
-        // 유효한 세션이 있다면 SIGNED_IN 이벤트를 기다리지 않고 바로 이동
-        navigate("/", { replace: true });
-      }
-    });
-
     const { data: authListenr } = supabase.auth.onAuthStateChange(
       (event, session) => {
         console.log("Auth Event:", event, session);
         if (event === "INITIAL_SESSION") {
+          console.log("INITIAL_SESSION감지");
           navigate("/", { replace: true });
         } else if (event === "SIGNED_IN" && session) {
           console.log("✅ SIGNED_IN event detected, navigating to /");
