@@ -11,7 +11,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_OUT") {
         setSession(null);
-      } else if (session) {
+      } else {
         setSession(session);
       }
     });
